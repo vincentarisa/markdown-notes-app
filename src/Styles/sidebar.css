@@ -1,0 +1,13 @@
+.dark{
+    background-color: #21222A;
+    color: #FFFFFF;
+}
+
+.dark .list-group-item{
+    background-color: #21222A;
+    color: #FFFFFF;
+}
+
+.dark .btn{
+    color: #FFFFFF;
+}
