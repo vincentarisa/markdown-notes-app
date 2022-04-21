@@ -11,3 +11,39 @@
 .dark .btn{
     color: #FFFFFF;
 }
+
+.w-45{
+    width: 45%;
+}
+
+.custom-dropdown-item{
+    cursor: pointer;
+}
+
+.custom-card-body{
+    height: 665px !important;
+    overflow: auto;
+}
+
+.custom-card-body::-webkit-scrollbar {
+    width: 05px;
+}
+
+.custom-card-body::-webkit-scrollbar-track {
+    background: rgb(179, 177, 177);
+}
+
+.custom-card-body::-webkit-scrollbar-thumb {
+    background: rgb(136, 136, 136);
+    border-radius: 10px;
+}
+
+.custom-card-body::-webkit-scrollbar-thumb:hover {
+    background: rgb(100, 100, 100);
+    border-radius: 10px;
+}
+
+.custom-card-body::-webkit-scrollbar-thumb:active {
+    background: rgb(68, 68, 68);
+    border-radius: 10px;
+}
