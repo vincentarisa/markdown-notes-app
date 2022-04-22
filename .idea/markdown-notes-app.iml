@@ -11,5 +11,6 @@
     <orderEntry type="module" module-name="meme-generator" />
     <orderEntry type="module" module-name="digital-business-card" />
     <orderEntry type="module" module-name="form-template" />
+    <orderEntry type="module" module-name="airbnb-experiences" />
   </component>
 </module>

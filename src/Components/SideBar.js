@@ -1,44 +1,176 @@
-import React from "react";
+import React, {useState} from "react";
+import Notes from "./Notes";
+import NotesData from "./notesData";
 
 export default function SideBar(props){
+    const date = new Date();
+    const currentDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
+    const [showPassword, setShowPassword] = useState(false)
+
+    function togglePassword(){
+        setShowPassword(prevShowPassword => !prevShowPassword)
+    }
+
+    const displayNotes = NotesData.map(displayNote => {
+        return(
+            <Notes
+                key = {displayNote.id}
+                {...displayNote}
+                darkMode = {props.darkMode}
+            />
+        )
+    })
+
+    const [formData, setFormData] = useState({
+        noteTitle : "",
+        description: "",
+        creationDate: currentDate,
+        notes : "",
+        passwordProtect: false,
+        password: "",
+        confirmPassword: ""
+    })
+
+    function handleChange(event) {
+        const {name, value, type, checked} = event.target
+        setFormData(prevFormData => ({
+            ...prevFormData,
+            [name]: type === "checkbox" ? checked : value
+        }))
+    }
+
+    function handleSubmit(event){
+        event.preventDefault()
+    }
+
     return(
         <div className={props.darkMode ? "card shadow-lg rounded dark" : "card shadow-lg rounded bg-light"}>
             <div className="card-header p-3">
                 <div className="row">
                     <div className="col-6">
-                        <button type="button"
-                                className="btn btn-primary"
-                                data-bs-toggle="modal"
-                                data-bs-target="#noteModal"
+                        <button
+                            type="button"
+                            className="btn btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#noteModal"
                         >
-                            <i className="bi bi-plus-circle" /> Add Note
+                            <i className="bi bi-plus-circle" />
+                            &nbsp; Add Note
                         </button>
 
-                        <div className="modal fade" id="noteModal"
-                             aria-hidden="true">
+                        <div className="modal fade" id="noteModal" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">
                                     <div className="modal-header">
                                         <h5 className="modal-title" id="ModalLabel">New Note</h5>
                                         <button type="button" className="btn-close" data-bs-dismiss="modal"></button>
                                     </div>
-                                    <div className="modal-body">
-                                        <form>
-                                            <div className="input-group mb-3 pt-3 px-3">
+                                   <form onSubmit={handleSubmit}>
+                                       <div className="modal-body">
+                                           <div className="input-group mb-3 pt-3 px-3">
                                                 <span className="input-group-text" id="inputGroup-sizing-default">
                                                     Note Title
                                                 </span>
-                                                <input type="text"
+                                               <input
+                                                   type="text"
+                                                   className="form-control"
+                                                   aria-describedby="inputGroup-sizing-default"
+                                                   name="noteTitle"
+                                                   value={formData.noteTitle}
+                                                   onChange={handleChange}
+                                               />
+                                           </div>
+
+                                           <div className="input-group mb-3 pt-3 px-3">
+                                                <span className="input-group-text" id="inputGroup-sizing-default">
+                                                    Description
+                                                </span>
+                                               <input
+                                                   type="text"
+                                                   className="form-control"
+                                                   aria-describedby="inputGroup-sizing-default"
+                                                   name="description"
+                                                   value={formData.description}
+                                                   onChange={handleChange}
+                                               />
+                                           </div>
+
+                                           <div className="input-group mb-3 pt-3 px-3">
+                                                <span className="input-group-text" id="inputGroup-sizing-default">
+                                                    Date
+                                                </span>
+                                               <input
+                                                   type="text"
+                                                   className="form-control"
+                                                   aria-describedby="inputGroup-sizing-default"
+                                                   name="creationDate"
+                                                   value={formData.creationDate}
+                                                   onChange={handleChange}
+                                                   disabled
+                                               />
+                                           </div>
+
+                                           <div className="p-3">
+                                               <input
+                                                   type = "checkbox"
+                                                   id = "passwordProtected"
+                                                   className="form-check-input"
+                                                   name = "passwordProtect"
+                                                   checked = {formData.passwordProtect}
+                                                   onChange = {handleChange}
+                                               />
+                                               <label htmlFor="passwordProtected" className="form-check-label">&nbsp; Protect Note With Password</label><br/>
+                                           </div>
+
+                                           {formData.passwordProtect &&
+                                               <div className="input-group mb-3 pt-3 px-3">
+                                                    <span className="input-group-text" id="inputGroup-sizing-default">
+                                                        Password
+                                                    </span>
+                                                   <input
+                                                       type={showPassword ? "text" : "password"}
                                                        className="form-control"
                                                        aria-describedby="inputGroup-sizing-default"
-                                                />
-                                            </div>
-                                        </form>
-                                    </div>
-                                    <div className="modal-footer d-flex justify-content-center">
-                                        <button type="button" className="btn btn-primary w-45">Use Normal Editor</button>
-                                        <button type="button" className="btn btn-primary w-45">Use Markdown Editor</button>
-                                    </div>
+                                                       name="password"
+                                                       value={formData.password}
+                                                       onChange={handleChange}
+                                                   />
+                                               </div>
+                                           }
+
+                                           {formData.passwordProtect &&
+                                               <div className="input-group mb-3 pt-3 px-3">
+                                                    <span className="input-group-text" id="inputGroup-sizing-default">
+                                                        Confirm Password
+                                                    </span>
+                                                   <input
+                                                       type={showPassword ? "text" : "password"}
+                                                       className="form-control"
+                                                       aria-describedby="inputGroup-sizing-default"
+                                                       name="confirmPassword"
+                                                       value={formData.confirmPassword}
+                                                       onChange={handleChange}
+                                                   />
+                                               </div>
+                                           }
+
+                                           {formData.passwordProtect &&
+                                               <div className="p-3">
+                                                   <input
+                                                       type = "checkbox"
+                                                       id = "showPassword"
+                                                       className="form-check-input"
+                                                       onClick={togglePassword}
+                                                   />
+                                                   <label htmlFor="showPassword" className="form-check-label">&nbsp; Show Password</label><br/>
+                                               </div>
+                                           }
+                                       </div>
+                                       <div className="modal-footer d-flex justify-content-center">
+                                           <button type="button" className="btn btn-primary w-45">Use Normal Editor</button>
+                                           <button type="button" className="btn btn-primary w-45">Use Markdown Editor</button>
+                                       </div>
+                                   </form>
                                 </div>
                             </div>
                         </div>
@@ -54,217 +186,7 @@ export default function SideBar(props){
             </div>
 
             <div className="card-body custom-card-body">
-                <ul className="list-group list-group-flush">
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">First Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Second Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Third Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Fourth Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Fifth Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Sixth Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-
-                    <li className={props.darkMode ? "list-group-item border-1 border-light rounded mb-2" : "list-group-item border-1 border-dark rounded mb-2"}>
-                        <div className="d-flex w-100 justify-content-between">
-                            <h5 className="mb-1">Seventh Note</h5>
-                            <small className="text-muted">3 days ago</small>
-                        </div>
-                        <p className="mb-1">Some placeholder content in a paragraph.</p>
-                        <small>
-                            <div className="btn-group btn-group-sm">
-                                <div className="btn-group btn-group-sm">
-                                    <button
-                                        id="btnGroupDrop1"
-                                        type="button"
-                                        className="btn btn-outline-secondary dropdown-toggle"
-                                        data-bs-toggle="dropdown"
-                                        aria-expanded="false">
-                                        <i className="bi bi-download"/> Download
-                                    </button>
-                                    <ul className="dropdown-menu" aria-labelledby="btnGroupDrop1">
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-file-pdf"/> pdf</li>
-                                        <li className="dropdown-item custom-dropdown-item border-2 border-bottom"><i className="bi bi-markdown"/> markdown</li>
-                                        <li className="dropdown-item custom-dropdown-item"><i className="bi bi-filetype-html"/> html</li>
-                                    </ul>
-                                </div>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-eyeglasses"/> View</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-pencil-square"/> Edit</button>
-                                <button type="button" className="btn btn-outline-secondary"><i className="bi bi-trash"/> Delete</button>
-                            </div>
-                        </small>
-                    </li>
-                </ul>
+                {displayNotes}
             </div>
 
             <div className="card-footer text-center">

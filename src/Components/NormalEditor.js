@@ -1,6 +1,9 @@
-import React from "react";
+import React, {useState} from "react";
+import ReactQuill from 'react-quill';
+import 'react-quill/dist/quill.snow.css';
 
 export default function NormalEditor(props){
+    const [value, setValue] = useState('');
 
     return(
         <div className={props.darkMode ? "card dark mb-3" : "card mb-3"}>
@@ -12,7 +15,12 @@ export default function NormalEditor(props){
             </div>
 
             <div className="card-body custom-editor-body">
-                <h1>Normal</h1>
+                <ReactQuill
+                    className="custom-normal-editor"
+                    theme="snow"
+                    value={value}
+                    onChange={setValue}
+                />
             </div>
         </div>
     )

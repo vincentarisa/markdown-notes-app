@@ -5,3 +5,11 @@
 .editor{
     height: 740px !important;
 }
+
+.custom-normal-editor{
+    height: 700px;
+}
+
+.custom-markdown-editor{
+    height: 744px;
+}
