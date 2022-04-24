@@ -1,3 +1,11 @@
+.w-45{
+    width: 45%;
+}
+
+.dark .btn{
+    color: #FFFFFF;
+}
+
 .dark{
     background-color: #21222A;
     color: #FFFFFF;
@@ -8,12 +16,18 @@
     color: #FFFFFF;
 }
 
-.dark .btn{
+.dark .modal-content{
+    background-color: #21222A;
     color: #FFFFFF;
 }
 
-.w-45{
-    width: 45%;
+.custom-icon{
+    font-size: 100px;
+}
+
+.custom-icon-lock{
+    font-size: 15px;
+    margin-right: 10px;
 }
 
 .custom-dropdown-item{

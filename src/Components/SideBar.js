@@ -6,21 +6,13 @@ export default function SideBar(props){
     const date = new Date();
     const currentDate = `${date.getDate()}/${date.getMonth()+1}/${date.getFullYear()}`;
     const [showPassword, setShowPassword] = useState(false)
+    const [passwordData, setPasswordData] = useState({password : ""})
+    const [providePassword, setProvidePassword] = useState(true)
+    const [locked, setLocked] = useState(true)
+    const [unlocked, setUnlocked] = useState(false)
+    const [deleteConfirmation, setDeleteConfirmation] = useState(false)
 
-    function togglePassword(){
-        setShowPassword(prevShowPassword => !prevShowPassword)
-    }
-
-    const displayNotes = NotesData.map(displayNote => {
-        return(
-            <Notes
-                key = {displayNote.id}
-                {...displayNote}
-                darkMode = {props.darkMode}
-            />
-        )
-    })
-
+    console.log(providePassword)
     const [formData, setFormData] = useState({
         noteTitle : "",
         description: "",
@@ -31,6 +23,26 @@ export default function SideBar(props){
         confirmPassword: ""
     })
 
+    setTimeout(function() {
+        if(unlocked){
+            setProvidePassword(prevProvidePassword => !prevProvidePassword)
+            setLocked(prevLocked => !prevLocked)
+            setUnlocked(prevUnlocked => !prevUnlocked)
+        }
+    },60000);
+
+    function confirmDeletion(){
+        setDeleteConfirmation(prevDeleteConfirmation => !prevDeleteConfirmation)
+    }
+
+    function togglePassword(){
+        setShowPassword(prevShowPassword => !prevShowPassword)
+    }
+
+    function handleSubmit(event){
+        event.preventDefault()
+    }
+
     function handleChange(event) {
         const {name, value, type, checked} = event.target
         setFormData(prevFormData => ({
@@ -39,9 +51,44 @@ export default function SideBar(props){
         }))
     }
 
-    function handleSubmit(event){
-        event.preventDefault()
+    function manuallyLockNote(){
+        setProvidePassword(prevProvidePassword => !prevProvidePassword)
+        setLocked(prevLocked => !prevLocked)
+        setUnlocked(prevUnlocked => !prevUnlocked)
     }
+
+    function confirmPassword (id){
+        const storedPassword = props.password;
+        if(storedPassword === passwordData.password){
+            setProvidePassword(prevProvidePassword => !prevProvidePassword)
+            setLocked(prevLocked => !prevLocked)
+            setUnlocked(prevUnlocked => !prevUnlocked)
+            setPasswordData({password : ""})
+        }else{
+            console.log("Wrong Password")
+        }
+    }
+
+    const displayNotes = NotesData.map(displayNote => {
+        return(
+            <Notes
+                key = {displayNote.id}
+                {...displayNote}
+                darkMode = {props.darkMode}
+                showPassword = {showPassword}
+                togglePassword = {togglePassword}
+                confirmPassword = {confirmPassword}
+                providePassword = {providePassword}
+                locked = {locked}
+                passwordData = {passwordData.password}
+                handleChange = {handleChange}
+                confirmDeletion = {confirmDeletion}
+                unlocked = {unlocked}
+                manuallyLockNote = {manuallyLockNote}
+                deleteConfirmation = {deleteConfirmation}
+            />
+        )
+    })
 
     return(
         <div className={props.darkMode ? "card shadow-lg rounded dark" : "card shadow-lg rounded bg-light"}>
@@ -58,6 +105,7 @@ export default function SideBar(props){
                             &nbsp; Add Note
                         </button>
 
+                        {/*Add Note Modal */}
                         <div className="modal fade" id="noteModal" aria-hidden="true">
                             <div className="modal-dialog">
                                 <div className="modal-content">

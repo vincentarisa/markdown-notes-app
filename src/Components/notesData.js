@@ -10,8 +10,8 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: true,
-        password: "123abc"
+        passwordProtected: true,
+        password: "12345"
     },
     {
         id: 2,
@@ -24,8 +24,8 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: false,
-        password: "123abc"
+        passwordProtected: true,
+        password: "12345"
     },
     {
         id: 3,
@@ -38,8 +38,8 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: true,
-        password: "123abc"
+        passwordProtected: true,
+        password: "12345"
     },
     {
         id: 4,
@@ -52,8 +52,8 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: false,
-        password: "123abc"
+        passwordProtected: false,
+        password: ""
     },
     {
         id: 5,
@@ -66,8 +66,8 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: false,
-        password: "123abc"
+        passwordProtected: false,
+        password: ""
     },
     {
         id: 6,
@@ -80,7 +80,7 @@ export default[
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
             "obcaecati tenetur iure eius earum ut molestias architecto voluptate aliquam\n" +
             "nihil, eveniet aliquid",
-        passwordProtect: false,
-        password: "123abc"
+        passwordProtected: false,
+        password: ""
     },
 ]
