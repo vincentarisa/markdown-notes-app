@@ -11,7 +11,7 @@ export default function Preview(props){
             </div>
 
             <div className="card-body custom-editor-body">
-                <h1>Markdown</h1>
+                <h1>Preview</h1>
             </div>
         </div>
     )
