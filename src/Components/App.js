@@ -4,7 +4,6 @@ import SideBar from "./SideBar";
 import NormalEditor from "./NormalEditor";
 import Preview from "./Preview"
 import NotesData from "./notesData";
-import Products from "./playground";
 
 export default function App(){
     const date = new Date();
@@ -68,7 +67,6 @@ export default function App(){
     return(
         <div>
             <Navbar darkMode = {darkMode} toggleDarkMode = {toggleDarkMode}/>
-            {/*<Products/>*/}
 
             <div className="container-fluid ps-2 pt-2">
                 <div className="row">
@@ -247,6 +245,7 @@ export default function App(){
                                 toggleEditorType = {toggleEditor}
                             />
                         }
+
                         {editorType === false &&
                             <Preview
                                 darkMode = {darkMode}

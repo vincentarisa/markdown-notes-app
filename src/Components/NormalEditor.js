@@ -3,7 +3,7 @@ import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
 export default function NormalEditor(props){
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState("");
 
     return(
         <div className={props.darkMode ? "card dark mb-3" : "card mb-3"}>

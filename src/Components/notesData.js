@@ -5,7 +5,7 @@ export default[
         description: "Example description of a first note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "1 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
@@ -20,7 +20,7 @@ export default[
         description: "Example description of a Second note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "2 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
@@ -35,7 +35,7 @@ export default[
         description: "Example description of a Third note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "3 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
@@ -50,7 +50,7 @@ export default[
         description: "Example description of a Fourth note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "4 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
@@ -65,7 +65,7 @@ export default[
         description: "Example description of a Fifth note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "5 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
@@ -80,7 +80,7 @@ export default[
         description: "Example description of a Sixth note",
         creationDate: "4/15/2020",
         notes:
-            "Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
+            "6 Lorem ipsum dolor sit amet consectetur adipisicing elit. Maxime mollitia,\n" +
             "molestiae quas vel sint commodi repudiandae consequuntur voluptatum laborum\n" +
             "numquam blanditiis harum quisquam eius sed odit fugiat iusto fuga praesentium\n" +
             "optio, eaque rerum! Provident similique accusantium nemo autem. Veritatis\n" +
